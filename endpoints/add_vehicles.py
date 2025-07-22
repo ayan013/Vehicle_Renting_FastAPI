@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models.vehicle_model import Vehicle,VehicleCreate,VehicleRead
+from models.vehicle_model import VehicleCreate,VehicleRead
 from sqlmodel import Session
 from db.db import get_db
 from db.vehicle_crud import insert_vehicles
