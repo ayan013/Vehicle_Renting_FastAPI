@@ -1,6 +1,7 @@
-from sqlmodel import Session
+from sqlmodel import Session,select
 from models.vehicle_model import Vehicle, VehicleCreate
 from typing import List
+
 
 def insert_vehicles(db: Session, vehicles: List[VehicleCreate]) -> List[Vehicle]:
     vehicle_all=[Vehicle(**v.model_dump()) for v in vehicles]
@@ -9,3 +10,9 @@ def insert_vehicles(db: Session, vehicles: List[VehicleCreate]) -> List[Vehicle]
     for v in vehicle_all:
         db.refresh(v)
     return vehicle_all
+
+def get_vehicles(db: Session, numbers: int):
+        query =select(Vehicle).limit(numbers)
+        result = db.exec(query)
+        vehicles = result.all()
+        return vehicles
