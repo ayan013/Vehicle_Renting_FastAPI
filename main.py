@@ -13,6 +13,7 @@ def on_startup():
     SQLModel.metadata.create_all(engine)
 
 app.include_router(vehicle_router.router)
+app.include_router(vehicle_router.router)
 
 if __name__ == "__main__":
     uvicorn.run("main:app",host="127.0.0.1",port=8080,reload=True)
