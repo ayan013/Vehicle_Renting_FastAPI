@@ -8,6 +8,7 @@ from typing import List
 
 router = APIRouter()
 
+
 @router.post(path="/add_vehicles",response_model=List[VehicleRead])
 async def add_vehicles(vehicles : List[VehicleCreate], db: Session=Depends(get_db)):
             return insert_vehicles(db, vehicles)
