@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     @property
     def DATABASE_URL(self) -> str:
         return(
-            f"postgresql://{self.DB_NAME}:{self.database_password}@"
+            f"postgresql://{self.DB_USERNAME}:{self.database_password}@"
             f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?sslmode=require"
         )
 
