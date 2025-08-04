@@ -1,5 +1,6 @@
+import os
 from pydantic_settings import BaseSettings
-from azure.identity import DefaultAzureCredential
+from azure.identity import ManagedIdentityCredential
 from azure.keyvault.secrets import SecretClient
 
 
@@ -18,7 +19,7 @@ class Settings(BaseSettings):
     @property
     def database_password(self) -> str:
         vault_url=f"https://{self.KEY_VAULT_NAME}.vault.azure.net/"
-        credential = DefaultAzureCredential()
+        credential = ManagedIdentityCredential(client_id=os.environ["AZURE_CLIENT_ID"])
         client = SecretClient(vault_url=vault_url,credential=credential)
         secret = client.get_secret(self.SECRET_NAME)
         return secret.value
